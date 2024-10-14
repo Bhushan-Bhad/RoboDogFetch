@@ -3,6 +3,6 @@ prefix=/home/bunny/RoboDogFetch/devel
 Name: path_planning
 Description: Description of path_planning
 Version: 0.0.0
-Cflags: 
+Cflags: -I/home/bunny/RoboDogFetch/devel/include
 Libs: -L${prefix}/lib 
-Requires: 
+Requires: message_runtime rospy std_msgs geometry_msgs

@@ -15,13 +15,13 @@ def input_camera_node():
     pub = rospy.Publisher('/camera/image_raw', Image, queue_size=10)
 
     # Set the publishing rate (in Hz)
-    rate = rospy.Rate(10)
+    rate = rospy.Rate(50)
 
     # Initialize the CvBridge
     bridge = CvBridge()
 
     # Open the webcam
-    cap = cv2.VideoCapture(0)
+    cap = cv2.VideoCapture(2)
 
     if not cap.isOpened():
         rospy.logerr("Cannot open webcam")

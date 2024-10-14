@@ -1,6 +1,8 @@
 #!/usr/bin/env python3
 
 import rospy
+import os
+import sys
 import platform
 import ctypes
 import numpy as np
@@ -8,7 +10,11 @@ import cv2
 import mediapipe as mp
 from ultralytics import YOLO
 from sensor_msgs.msg import Image
+from std_msgs.msg import String
 from cv_bridge import CvBridge, CvBridgeError
+from geometry_msgs.msg import PoseStamped
+from distance_calc_MonocularDepthEstimation import estimate_depth
+import time  # To limit the frame rate
 
 # Known real-world sizes (in meters)
 HUMAN_HEIGHT = 1.7  # Approximate average height of a human in meters
@@ -27,7 +33,7 @@ def estimate_distance(focal_length, real_height, pixel_height):
         return float('inf')
     return (focal_length * real_height) / pixel_height
 
-# Main function for human, sports ball detection with hand gesture recognition and distance calculation
+# Main function for human and sports ball detection with hand gesture recognition and distance calculation
 def human_detection():
     # Force libgomp to be loaded before other libraries consuming dynamic TLS
     if platform.system() == "Linux":
@@ -48,71 +54,78 @@ def human_detection():
 
     # Initialize CvBridge for converting ROS Image messages to OpenCV images
     bridge = CvBridge()
+    target_position_pub = rospy.Publisher('/target_position', PoseStamped, queue_size=10)
+    target_command_pub = rospy.Publisher('/target_command', String, queue_size=10)
 
-    # Callback function to process each frame from the ROS camera topic
+
+    global last_detected_position
+    global frame_counter
+    # Define global variables
+    last_detected_position = None
+    frame_counter = 0  # To process every N-th frame
+    frame_rate_limit = 5  # Process 1 frame out of every 5 (adjust as necessary)
+
     def process_frame(ros_image):
+        global last_detected_position
+        global frame_counter
+
+        # Increment frame counter and skip frames to limit processing rate
+        frame_counter += 1
+        if frame_counter % frame_rate_limit != 0:
+            return  # Skip frame
+
+        start_time = time.time()  # Track time for performance measurement
+
+        # Convert ROS Image message to OpenCV format
         try:
-            # Convert ROS Image message to OpenCV format
             frame = bridge.imgmsg_to_cv2(ros_image, "bgr8")
         except CvBridgeError as e:
             rospy.logerr(f"CvBridge Error: {e}")
             return
 
-        # Run YOLOv8 to detect objects (including humans and sports balls)
+        # Resize frame to reduce computational load
+        frame = cv2.resize(frame, (640, 480))  # Adjust resolution to reduce processing
+
+        # YOLOv8 to detect objects (including humans)
         results = model(frame)
-
-        # Convert the frame to RGB for MediaPipe processing
         image_rgb = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
-
-        # Initialize MediaPipe Hands for gesture recognition
+        
         with mp_hands.Hands(min_detection_confidence=0.7, min_tracking_confidence=0.5) as hands:
-
-            # Handle YOLO results safely
+            
             if results is None or len(results) == 0 or not results[0].boxes:
                 rospy.logwarn("No detections found.")
-                cv2.imshow('Human and Sports Ball Detection', frame)
+                cv2.imshow('Human Detection', frame)
                 if cv2.waitKey(1) & 0xFF == ord('q'):
                     rospy.signal_shutdown("User exit.")
                 return
 
-            # Filter YOLO results for humans (class label 'person' = 0) and sports ball (class label '32')
-            humans = [r for r in results if r.boxes and r.boxes.cls[0].item() == 0]  # Assuming class '0' is 'person'
-            sports_balls = [r for r in results if r.boxes and r.boxes.cls[0].item() == 32]  # Assuming class '32' is 'sports ball'
+            frame_height, frame_width, _ = frame.shape
+            humans = [r for r in results if r.boxes and r.boxes.cls[0].item() == 0]
 
-            # Loop through detected humans
             for human in humans:
-                box = human.boxes.xyxy[0].cpu().numpy()  # Get bounding box
-                x1, y1, x2, y2 = map(int, box)  # Bounding box coordinates
-                pixel_height = y2 - y1  # Height of bounding box in pixels
+                box = human.boxes.xyxy[0].cpu().numpy()
+                x1, y1, x2, y2 = map(int, box)
 
-                # Estimate distance to the human
-                distance_to_human = estimate_distance(FOCAL_LENGTH, HUMAN_HEIGHT, pixel_height)
-                rospy.loginfo(f"Estimated distance to human: {distance_to_human:.2f} meters")
+                x1, x2 = max(0, x1), min(frame_width - 1, x2)
+                y1, y2 = max(0, y1), min(frame_height - 1, y2)
 
-                # Draw bounding box around detected human
-                cv2.rectangle(frame, (x1, y1), (x2, y2), (0, 255, 0), 2)
-                cv2.putText(frame, f"Distance: {distance_to_human:.2f}m", (x1, y1 - 10), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 2)
+                x_center = (x1 + x2) // 2
+                y_center = (y1 + y2) // 2
 
-                # Process hand gesture recognition within the detected human's bounding box
-                roi = image_rgb[y1:y2, x1:x2]  # Crop region of interest
-                roi_contiguous = np.ascontiguousarray(roi)  # Ensure C-contiguous
-
-                # Detect hands in the cropped ROI
+                # Gesture detection within cropped region of interest (ROI)
+                roi = image_rgb[y1:y2, x1:x2]
+                roi_contiguous = np.ascontiguousarray(roi)
                 hand_results = hands.process(roi_contiguous)
 
                 if hand_results.multi_hand_landmarks:
                     for hand_landmarks, hand_handedness in zip(hand_results.multi_hand_landmarks, hand_results.multi_handedness):
-                        # Draw hand landmarks
-                        mp_drawing.draw_landmarks(frame[y1:y2, x1:x2], hand_landmarks, mp_hands.HAND_CONNECTIONS)
-
-                        # Extract hand landmarks for gesture recognition
                         landmarks = hand_landmarks.landmark
                         wrist = landmarks[0]
                         middle_finger_tip = landmarks[12]
                         thumb_tip = landmarks[4]
                         pinky_tip = landmarks[20]
 
-                        hand_label = hand_handedness.classification[0].label  # 'Left' or 'Right'
+                        hand_label = hand_handedness.classification[0].label
                         vertical = abs(wrist.x - middle_finger_tip.x) < 0.1
 
                         if hand_label == "Right":
@@ -122,37 +135,56 @@ def human_detection():
 
                         fingers_open = all(landmarks[tip].y < landmarks[tip - 2].y for tip in [8, 12, 16, 20])
 
+                        # If "Hi" gesture detected
                         if vertical and palm_open and fingers_open:
                             cv2.putText(frame, f"Hi Gesture Detected! ({hand_label} hand)", (x1, y1 - 30), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 2)
 
-            # Loop through detected sports balls
-            for ball in sports_balls:
-                box = ball.boxes.xyxy[0].cpu().numpy()  # Get bounding box
-                x1, y1, x2, y2 = map(int, box)  # Bounding box coordinates
-                pixel_height = y2 - y1  # Height of bounding box in pixels
+                            try:
+                                depth_map = estimate_depth(frame)
+                                x_center_scaled = int((x_center / frame_width) * depth_map.shape[1])
+                                y_center_scaled = int((y_center / frame_height) * depth_map.shape[0])
 
-                # Estimate distance to the sports ball
-                distance_to_ball = estimate_distance(FOCAL_LENGTH, BALL_DIAMETER, pixel_height)
-                rospy.loginfo(f"Estimated distance to sports ball: {distance_to_ball:.2f} meters")
+                                # Get depth at the scaled coordinates
+                                depth_at_person = depth_map[y_center_scaled, x_center_scaled]
+                                calibration_scale = 0.0013
+                                calibrated_distance = depth_at_person * calibration_scale
 
-                # Draw bounding box around detected sports ball
-                cv2.rectangle(frame, (x1, y1), (x2, y2), (0, 0, 255), 2)
-                cv2.putText(frame, f"Ball Distance: {distance_to_ball:.2f}m", (x1, y1 - 10), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 0, 255), 2)
+                                rospy.loginfo(f"Estimated distance to human: {calibrated_distance:.2f} meters")
 
-        # Display the frame with detected humans, sports balls, hand gestures, and distances
-        cv2.imshow('Human, Sports Ball and Hand Gesture Detection', frame)
+                                # If the person's position has changed, update the last detected position and publish it
+                                new_position = (x_center_scaled, y_center_scaled, calibrated_distance)
+                                if last_detected_position is None or np.linalg.norm(np.array(new_position) - np.array(last_detected_position)) > 0.1:
+                                    last_detected_position = new_position
+                                    
+                                    # Publish the new target position
+                                    target_msg = PoseStamped()
+                                    target_msg.header.stamp = rospy.Time.now()
+                                    target_msg.header.frame_id = "camera_frame"
+                                    target_msg.pose.position.x = x_center_scaled * 0.1
+                                    target_msg.pose.position.y = y_center_scaled * 0.1
+                                    target_msg.pose.position.z = calibrated_distance
+                                    target_position_pub.publish(target_msg)
 
-        # Wait for 'q' key press to quit
-        if cv2.waitKey(1) & 0xFF == ord('q'):
-            rospy.signal_shutdown("User exit.")
+                                    # Publish the command
+                                    target_command_pub.publish("go_to_human")
 
-    # Subscribe to the camera image topic (replace '/camera/image_raw' with your topic name)
-    rospy.Subscriber('/camera/image_raw', Image, process_frame)
+                            except Exception as e:
+                                rospy.logerr(f"Error in depth estimation: {e}")
+                                continue
+
+            # Show the frame with detections
+            cv2.imshow('Human and Sports Ball Detection', frame)
+            if cv2.waitKey(1) & 0xFF == ord('q'):
+                rospy.signal_shutdown("User exit.")
+    
+        end_time = time.time()  # For performance tracking
+        rospy.loginfo(f"Frame processing time: {end_time - start_time:.2f} seconds")
+
+    # Subscribe to the camera topic
+    rospy.Subscriber("/camera/image_raw", Image, process_frame)
 
     # Keep the node running
     rospy.spin()
-
-    # Release resources when done
     cv2.destroyAllWindows()
 
 if __name__ == '__main__':

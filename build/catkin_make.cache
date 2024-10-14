@@ -1,2 +1,2 @@
-input_camera:object_detection:path_planning:robot_control:unitree_legged_sdk:unitree_ros_to_real/unitree_legged_msgs:unitree_ros_to_real/unitree_legged_real
+input_camera:object_detection:path_planning:robot_control:slam_package:unitree_legged_sdk:unitree_ros_to_real/unitree_legged_msgs:unitree_ros_to_real/unitree_legged_real
 -DCATKIN_DEVEL_PREFIX=/home/bunny/RoboDogFetch/devel -DCMAKE_INSTALL_PREFIX=/home/bunny/RoboDogFetch/install -G Unix Makefiles

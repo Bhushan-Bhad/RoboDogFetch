@@ -136,6 +136,7 @@ if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   include("/home/bunny/RoboDogFetch/build/path_planning/cmake_install.cmake")
   include("/home/bunny/RoboDogFetch/build/robot_control/cmake_install.cmake")
   include("/home/bunny/RoboDogFetch/build/input_camera/cmake_install.cmake")
+  include("/home/bunny/RoboDogFetch/build/slam_package/cmake_install.cmake")
   include("/home/bunny/RoboDogFetch/build/unitree_ros_to_real/unitree_legged_msgs/cmake_install.cmake")
   include("/home/bunny/RoboDogFetch/build/unitree_ros_to_real/unitree_legged_real/cmake_install.cmake")
 

@@ -68,17 +68,17 @@ install/strip/fast: preinstall/fast
 	/usr/bin/cmake -DCMAKE_INSTALL_DO_STRIP=1 -P cmake_install.cmake
 .PHONY : install/strip/fast
 
-# Special rule for the target install/local
-install/local: preinstall
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Installing only the local directory..."
-	/usr/bin/cmake -DCMAKE_INSTALL_LOCAL_ONLY=1 -P cmake_install.cmake
-.PHONY : install/local
+# Special rule for the target install
+install: preinstall
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Install the project..."
+	/usr/bin/cmake -P cmake_install.cmake
+.PHONY : install
 
-# Special rule for the target install/local
-install/local/fast: preinstall/fast
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Installing only the local directory..."
-	/usr/bin/cmake -DCMAKE_INSTALL_LOCAL_ONLY=1 -P cmake_install.cmake
-.PHONY : install/local/fast
+# Special rule for the target install
+install/fast: preinstall/fast
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Install the project..."
+	/usr/bin/cmake -P cmake_install.cmake
+.PHONY : install/fast
 
 # Special rule for the target list_install_components
 list_install_components:
@@ -123,17 +123,17 @@ test/fast: test
 
 .PHONY : test/fast
 
-# Special rule for the target install
-install: preinstall
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Install the project..."
-	/usr/bin/cmake -P cmake_install.cmake
-.PHONY : install
+# Special rule for the target install/local
+install/local: preinstall
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Installing only the local directory..."
+	/usr/bin/cmake -DCMAKE_INSTALL_LOCAL_ONLY=1 -P cmake_install.cmake
+.PHONY : install/local
 
-# Special rule for the target install
-install/fast: preinstall/fast
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Install the project..."
-	/usr/bin/cmake -P cmake_install.cmake
-.PHONY : install/fast
+# Special rule for the target install/local
+install/local/fast: preinstall/fast
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Installing only the local directory..."
+	/usr/bin/cmake -DCMAKE_INSTALL_LOCAL_ONLY=1 -P cmake_install.cmake
+.PHONY : install/local/fast
 
 # The main all target
 all: cmake_check_build_system
@@ -168,19 +168,19 @@ depend:
 .PHONY : depend
 
 # Convenience name for target.
-unitree_ros_to_real/unitree_legged_real/CMakeFiles/control_via_keyboard.dir/rule:
-	cd /home/bunny/RoboDogFetch/build && $(MAKE) -f CMakeFiles/Makefile2 unitree_ros_to_real/unitree_legged_real/CMakeFiles/control_via_keyboard.dir/rule
-.PHONY : unitree_ros_to_real/unitree_legged_real/CMakeFiles/control_via_keyboard.dir/rule
+unitree_ros_to_real/unitree_legged_real/CMakeFiles/twist_sub.dir/rule:
+	cd /home/bunny/RoboDogFetch/build && $(MAKE) -f CMakeFiles/Makefile2 unitree_ros_to_real/unitree_legged_real/CMakeFiles/twist_sub.dir/rule
+.PHONY : unitree_ros_to_real/unitree_legged_real/CMakeFiles/twist_sub.dir/rule
 
 # Convenience name for target.
-control_via_keyboard: unitree_ros_to_real/unitree_legged_real/CMakeFiles/control_via_keyboard.dir/rule
+twist_sub: unitree_ros_to_real/unitree_legged_real/CMakeFiles/twist_sub.dir/rule
 
-.PHONY : control_via_keyboard
+.PHONY : twist_sub
 
 # fast build rule for target.
-control_via_keyboard/fast:
-	cd /home/bunny/RoboDogFetch/build && $(MAKE) -f unitree_ros_to_real/unitree_legged_real/CMakeFiles/control_via_keyboard.dir/build.make unitree_ros_to_real/unitree_legged_real/CMakeFiles/control_via_keyboard.dir/build
-.PHONY : control_via_keyboard/fast
+twist_sub/fast:
+	cd /home/bunny/RoboDogFetch/build && $(MAKE) -f unitree_ros_to_real/unitree_legged_real/CMakeFiles/twist_sub.dir/build.make unitree_ros_to_real/unitree_legged_real/CMakeFiles/twist_sub.dir/build
+.PHONY : twist_sub/fast
 
 # Convenience name for target.
 unitree_ros_to_real/unitree_legged_real/CMakeFiles/ros_udp.dir/rule:
@@ -198,66 +198,6 @@ ros_udp/fast:
 .PHONY : ros_udp/fast
 
 # Convenience name for target.
-unitree_ros_to_real/unitree_legged_real/CMakeFiles/roscpp_generate_messages_cpp.dir/rule:
-	cd /home/bunny/RoboDogFetch/build && $(MAKE) -f CMakeFiles/Makefile2 unitree_ros_to_real/unitree_legged_real/CMakeFiles/roscpp_generate_messages_cpp.dir/rule
-.PHONY : unitree_ros_to_real/unitree_legged_real/CMakeFiles/roscpp_generate_messages_cpp.dir/rule
-
-# Convenience name for target.
-roscpp_generate_messages_cpp: unitree_ros_to_real/unitree_legged_real/CMakeFiles/roscpp_generate_messages_cpp.dir/rule
-
-.PHONY : roscpp_generate_messages_cpp
-
-# fast build rule for target.
-roscpp_generate_messages_cpp/fast:
-	cd /home/bunny/RoboDogFetch/build && $(MAKE) -f unitree_ros_to_real/unitree_legged_real/CMakeFiles/roscpp_generate_messages_cpp.dir/build.make unitree_ros_to_real/unitree_legged_real/CMakeFiles/roscpp_generate_messages_cpp.dir/build
-.PHONY : roscpp_generate_messages_cpp/fast
-
-# Convenience name for target.
-unitree_ros_to_real/unitree_legged_real/CMakeFiles/roscpp_generate_messages_eus.dir/rule:
-	cd /home/bunny/RoboDogFetch/build && $(MAKE) -f CMakeFiles/Makefile2 unitree_ros_to_real/unitree_legged_real/CMakeFiles/roscpp_generate_messages_eus.dir/rule
-.PHONY : unitree_ros_to_real/unitree_legged_real/CMakeFiles/roscpp_generate_messages_eus.dir/rule
-
-# Convenience name for target.
-roscpp_generate_messages_eus: unitree_ros_to_real/unitree_legged_real/CMakeFiles/roscpp_generate_messages_eus.dir/rule
-
-.PHONY : roscpp_generate_messages_eus
-
-# fast build rule for target.
-roscpp_generate_messages_eus/fast:
-	cd /home/bunny/RoboDogFetch/build && $(MAKE) -f unitree_ros_to_real/unitree_legged_real/CMakeFiles/roscpp_generate_messages_eus.dir/build.make unitree_ros_to_real/unitree_legged_real/CMakeFiles/roscpp_generate_messages_eus.dir/build
-.PHONY : roscpp_generate_messages_eus/fast
-
-# Convenience name for target.
-unitree_ros_to_real/unitree_legged_real/CMakeFiles/twist_sub.dir/rule:
-	cd /home/bunny/RoboDogFetch/build && $(MAKE) -f CMakeFiles/Makefile2 unitree_ros_to_real/unitree_legged_real/CMakeFiles/twist_sub.dir/rule
-.PHONY : unitree_ros_to_real/unitree_legged_real/CMakeFiles/twist_sub.dir/rule
-
-# Convenience name for target.
-twist_sub: unitree_ros_to_real/unitree_legged_real/CMakeFiles/twist_sub.dir/rule
-
-.PHONY : twist_sub
-
-# fast build rule for target.
-twist_sub/fast:
-	cd /home/bunny/RoboDogFetch/build && $(MAKE) -f unitree_ros_to_real/unitree_legged_real/CMakeFiles/twist_sub.dir/build.make unitree_ros_to_real/unitree_legged_real/CMakeFiles/twist_sub.dir/build
-.PHONY : twist_sub/fast
-
-# Convenience name for target.
-unitree_ros_to_real/unitree_legged_real/CMakeFiles/rosgraph_msgs_generate_messages_nodejs.dir/rule:
-	cd /home/bunny/RoboDogFetch/build && $(MAKE) -f CMakeFiles/Makefile2 unitree_ros_to_real/unitree_legged_real/CMakeFiles/rosgraph_msgs_generate_messages_nodejs.dir/rule
-.PHONY : unitree_ros_to_real/unitree_legged_real/CMakeFiles/rosgraph_msgs_generate_messages_nodejs.dir/rule
-
-# Convenience name for target.
-rosgraph_msgs_generate_messages_nodejs: unitree_ros_to_real/unitree_legged_real/CMakeFiles/rosgraph_msgs_generate_messages_nodejs.dir/rule
-
-.PHONY : rosgraph_msgs_generate_messages_nodejs
-
-# fast build rule for target.
-rosgraph_msgs_generate_messages_nodejs/fast:
-	cd /home/bunny/RoboDogFetch/build && $(MAKE) -f unitree_ros_to_real/unitree_legged_real/CMakeFiles/rosgraph_msgs_generate_messages_nodejs.dir/build.make unitree_ros_to_real/unitree_legged_real/CMakeFiles/rosgraph_msgs_generate_messages_nodejs.dir/build
-.PHONY : rosgraph_msgs_generate_messages_nodejs/fast
-
-# Convenience name for target.
 unitree_ros_to_real/unitree_legged_real/CMakeFiles/state_sub.dir/rule:
 	cd /home/bunny/RoboDogFetch/build && $(MAKE) -f CMakeFiles/Makefile2 unitree_ros_to_real/unitree_legged_real/CMakeFiles/state_sub.dir/rule
 .PHONY : unitree_ros_to_real/unitree_legged_real/CMakeFiles/state_sub.dir/rule
@@ -273,109 +213,34 @@ state_sub/fast:
 .PHONY : state_sub/fast
 
 # Convenience name for target.
-unitree_ros_to_real/unitree_legged_real/CMakeFiles/roscpp_generate_messages_py.dir/rule:
-	cd /home/bunny/RoboDogFetch/build && $(MAKE) -f CMakeFiles/Makefile2 unitree_ros_to_real/unitree_legged_real/CMakeFiles/roscpp_generate_messages_py.dir/rule
-.PHONY : unitree_ros_to_real/unitree_legged_real/CMakeFiles/roscpp_generate_messages_py.dir/rule
+unitree_ros_to_real/unitree_legged_real/CMakeFiles/ros_example_position.dir/rule:
+	cd /home/bunny/RoboDogFetch/build && $(MAKE) -f CMakeFiles/Makefile2 unitree_ros_to_real/unitree_legged_real/CMakeFiles/ros_example_position.dir/rule
+.PHONY : unitree_ros_to_real/unitree_legged_real/CMakeFiles/ros_example_position.dir/rule
 
 # Convenience name for target.
-roscpp_generate_messages_py: unitree_ros_to_real/unitree_legged_real/CMakeFiles/roscpp_generate_messages_py.dir/rule
+ros_example_position: unitree_ros_to_real/unitree_legged_real/CMakeFiles/ros_example_position.dir/rule
 
-.PHONY : roscpp_generate_messages_py
+.PHONY : ros_example_position
 
 # fast build rule for target.
-roscpp_generate_messages_py/fast:
-	cd /home/bunny/RoboDogFetch/build && $(MAKE) -f unitree_ros_to_real/unitree_legged_real/CMakeFiles/roscpp_generate_messages_py.dir/build.make unitree_ros_to_real/unitree_legged_real/CMakeFiles/roscpp_generate_messages_py.dir/build
-.PHONY : roscpp_generate_messages_py/fast
+ros_example_position/fast:
+	cd /home/bunny/RoboDogFetch/build && $(MAKE) -f unitree_ros_to_real/unitree_legged_real/CMakeFiles/ros_example_position.dir/build.make unitree_ros_to_real/unitree_legged_real/CMakeFiles/ros_example_position.dir/build
+.PHONY : ros_example_position/fast
 
 # Convenience name for target.
-unitree_ros_to_real/unitree_legged_real/CMakeFiles/roscpp_generate_messages_nodejs.dir/rule:
-	cd /home/bunny/RoboDogFetch/build && $(MAKE) -f CMakeFiles/Makefile2 unitree_ros_to_real/unitree_legged_real/CMakeFiles/roscpp_generate_messages_nodejs.dir/rule
-.PHONY : unitree_ros_to_real/unitree_legged_real/CMakeFiles/roscpp_generate_messages_nodejs.dir/rule
+unitree_ros_to_real/unitree_legged_real/CMakeFiles/control_via_keyboard.dir/rule:
+	cd /home/bunny/RoboDogFetch/build && $(MAKE) -f CMakeFiles/Makefile2 unitree_ros_to_real/unitree_legged_real/CMakeFiles/control_via_keyboard.dir/rule
+.PHONY : unitree_ros_to_real/unitree_legged_real/CMakeFiles/control_via_keyboard.dir/rule
 
 # Convenience name for target.
-roscpp_generate_messages_nodejs: unitree_ros_to_real/unitree_legged_real/CMakeFiles/roscpp_generate_messages_nodejs.dir/rule
+control_via_keyboard: unitree_ros_to_real/unitree_legged_real/CMakeFiles/control_via_keyboard.dir/rule
 
-.PHONY : roscpp_generate_messages_nodejs
+.PHONY : control_via_keyboard
 
 # fast build rule for target.
-roscpp_generate_messages_nodejs/fast:
-	cd /home/bunny/RoboDogFetch/build && $(MAKE) -f unitree_ros_to_real/unitree_legged_real/CMakeFiles/roscpp_generate_messages_nodejs.dir/build.make unitree_ros_to_real/unitree_legged_real/CMakeFiles/roscpp_generate_messages_nodejs.dir/build
-.PHONY : roscpp_generate_messages_nodejs/fast
-
-# Convenience name for target.
-unitree_ros_to_real/unitree_legged_real/CMakeFiles/rosgraph_msgs_generate_messages_cpp.dir/rule:
-	cd /home/bunny/RoboDogFetch/build && $(MAKE) -f CMakeFiles/Makefile2 unitree_ros_to_real/unitree_legged_real/CMakeFiles/rosgraph_msgs_generate_messages_cpp.dir/rule
-.PHONY : unitree_ros_to_real/unitree_legged_real/CMakeFiles/rosgraph_msgs_generate_messages_cpp.dir/rule
-
-# Convenience name for target.
-rosgraph_msgs_generate_messages_cpp: unitree_ros_to_real/unitree_legged_real/CMakeFiles/rosgraph_msgs_generate_messages_cpp.dir/rule
-
-.PHONY : rosgraph_msgs_generate_messages_cpp
-
-# fast build rule for target.
-rosgraph_msgs_generate_messages_cpp/fast:
-	cd /home/bunny/RoboDogFetch/build && $(MAKE) -f unitree_ros_to_real/unitree_legged_real/CMakeFiles/rosgraph_msgs_generate_messages_cpp.dir/build.make unitree_ros_to_real/unitree_legged_real/CMakeFiles/rosgraph_msgs_generate_messages_cpp.dir/build
-.PHONY : rosgraph_msgs_generate_messages_cpp/fast
-
-# Convenience name for target.
-unitree_ros_to_real/unitree_legged_real/CMakeFiles/rosgraph_msgs_generate_messages_eus.dir/rule:
-	cd /home/bunny/RoboDogFetch/build && $(MAKE) -f CMakeFiles/Makefile2 unitree_ros_to_real/unitree_legged_real/CMakeFiles/rosgraph_msgs_generate_messages_eus.dir/rule
-.PHONY : unitree_ros_to_real/unitree_legged_real/CMakeFiles/rosgraph_msgs_generate_messages_eus.dir/rule
-
-# Convenience name for target.
-rosgraph_msgs_generate_messages_eus: unitree_ros_to_real/unitree_legged_real/CMakeFiles/rosgraph_msgs_generate_messages_eus.dir/rule
-
-.PHONY : rosgraph_msgs_generate_messages_eus
-
-# fast build rule for target.
-rosgraph_msgs_generate_messages_eus/fast:
-	cd /home/bunny/RoboDogFetch/build && $(MAKE) -f unitree_ros_to_real/unitree_legged_real/CMakeFiles/rosgraph_msgs_generate_messages_eus.dir/build.make unitree_ros_to_real/unitree_legged_real/CMakeFiles/rosgraph_msgs_generate_messages_eus.dir/build
-.PHONY : rosgraph_msgs_generate_messages_eus/fast
-
-# Convenience name for target.
-unitree_ros_to_real/unitree_legged_real/CMakeFiles/rosgraph_msgs_generate_messages_lisp.dir/rule:
-	cd /home/bunny/RoboDogFetch/build && $(MAKE) -f CMakeFiles/Makefile2 unitree_ros_to_real/unitree_legged_real/CMakeFiles/rosgraph_msgs_generate_messages_lisp.dir/rule
-.PHONY : unitree_ros_to_real/unitree_legged_real/CMakeFiles/rosgraph_msgs_generate_messages_lisp.dir/rule
-
-# Convenience name for target.
-rosgraph_msgs_generate_messages_lisp: unitree_ros_to_real/unitree_legged_real/CMakeFiles/rosgraph_msgs_generate_messages_lisp.dir/rule
-
-.PHONY : rosgraph_msgs_generate_messages_lisp
-
-# fast build rule for target.
-rosgraph_msgs_generate_messages_lisp/fast:
-	cd /home/bunny/RoboDogFetch/build && $(MAKE) -f unitree_ros_to_real/unitree_legged_real/CMakeFiles/rosgraph_msgs_generate_messages_lisp.dir/build.make unitree_ros_to_real/unitree_legged_real/CMakeFiles/rosgraph_msgs_generate_messages_lisp.dir/build
-.PHONY : rosgraph_msgs_generate_messages_lisp/fast
-
-# Convenience name for target.
-unitree_ros_to_real/unitree_legged_real/CMakeFiles/roscpp_generate_messages_lisp.dir/rule:
-	cd /home/bunny/RoboDogFetch/build && $(MAKE) -f CMakeFiles/Makefile2 unitree_ros_to_real/unitree_legged_real/CMakeFiles/roscpp_generate_messages_lisp.dir/rule
-.PHONY : unitree_ros_to_real/unitree_legged_real/CMakeFiles/roscpp_generate_messages_lisp.dir/rule
-
-# Convenience name for target.
-roscpp_generate_messages_lisp: unitree_ros_to_real/unitree_legged_real/CMakeFiles/roscpp_generate_messages_lisp.dir/rule
-
-.PHONY : roscpp_generate_messages_lisp
-
-# fast build rule for target.
-roscpp_generate_messages_lisp/fast:
-	cd /home/bunny/RoboDogFetch/build && $(MAKE) -f unitree_ros_to_real/unitree_legged_real/CMakeFiles/roscpp_generate_messages_lisp.dir/build.make unitree_ros_to_real/unitree_legged_real/CMakeFiles/roscpp_generate_messages_lisp.dir/build
-.PHONY : roscpp_generate_messages_lisp/fast
-
-# Convenience name for target.
-unitree_ros_to_real/unitree_legged_real/CMakeFiles/rosgraph_msgs_generate_messages_py.dir/rule:
-	cd /home/bunny/RoboDogFetch/build && $(MAKE) -f CMakeFiles/Makefile2 unitree_ros_to_real/unitree_legged_real/CMakeFiles/rosgraph_msgs_generate_messages_py.dir/rule
-.PHONY : unitree_ros_to_real/unitree_legged_real/CMakeFiles/rosgraph_msgs_generate_messages_py.dir/rule
-
-# Convenience name for target.
-rosgraph_msgs_generate_messages_py: unitree_ros_to_real/unitree_legged_real/CMakeFiles/rosgraph_msgs_generate_messages_py.dir/rule
-
-.PHONY : rosgraph_msgs_generate_messages_py
-
-# fast build rule for target.
-rosgraph_msgs_generate_messages_py/fast:
-	cd /home/bunny/RoboDogFetch/build && $(MAKE) -f unitree_ros_to_real/unitree_legged_real/CMakeFiles/rosgraph_msgs_generate_messages_py.dir/build.make unitree_ros_to_real/unitree_legged_real/CMakeFiles/rosgraph_msgs_generate_messages_py.dir/build
-.PHONY : rosgraph_msgs_generate_messages_py/fast
+control_via_keyboard/fast:
+	cd /home/bunny/RoboDogFetch/build && $(MAKE) -f unitree_ros_to_real/unitree_legged_real/CMakeFiles/control_via_keyboard.dir/build.make unitree_ros_to_real/unitree_legged_real/CMakeFiles/control_via_keyboard.dir/build
+.PHONY : control_via_keyboard/fast
 
 # Convenience name for target.
 unitree_ros_to_real/unitree_legged_real/CMakeFiles/ros_example_walk.dir/rule:
@@ -391,21 +256,6 @@ ros_example_walk: unitree_ros_to_real/unitree_legged_real/CMakeFiles/ros_example
 ros_example_walk/fast:
 	cd /home/bunny/RoboDogFetch/build && $(MAKE) -f unitree_ros_to_real/unitree_legged_real/CMakeFiles/ros_example_walk.dir/build.make unitree_ros_to_real/unitree_legged_real/CMakeFiles/ros_example_walk.dir/build
 .PHONY : ros_example_walk/fast
-
-# Convenience name for target.
-unitree_ros_to_real/unitree_legged_real/CMakeFiles/ros_example_position.dir/rule:
-	cd /home/bunny/RoboDogFetch/build && $(MAKE) -f CMakeFiles/Makefile2 unitree_ros_to_real/unitree_legged_real/CMakeFiles/ros_example_position.dir/rule
-.PHONY : unitree_ros_to_real/unitree_legged_real/CMakeFiles/ros_example_position.dir/rule
-
-# Convenience name for target.
-ros_example_position: unitree_ros_to_real/unitree_legged_real/CMakeFiles/ros_example_position.dir/rule
-
-.PHONY : ros_example_position
-
-# fast build rule for target.
-ros_example_position/fast:
-	cd /home/bunny/RoboDogFetch/build && $(MAKE) -f unitree_ros_to_real/unitree_legged_real/CMakeFiles/ros_example_position.dir/build.make unitree_ros_to_real/unitree_legged_real/CMakeFiles/ros_example_position.dir/build
-.PHONY : ros_example_position/fast
 
 src/exe/control_via_keyboard.o: src/exe/control_via_keyboard.cpp.o
 
@@ -576,28 +426,18 @@ help:
 	@echo "... clean"
 	@echo "... depend"
 	@echo "... install/strip"
-	@echo "... install/local"
+	@echo "... install"
 	@echo "... list_install_components"
 	@echo "... rebuild_cache"
 	@echo "... edit_cache"
 	@echo "... test"
-	@echo "... control_via_keyboard"
-	@echo "... ros_udp"
-	@echo "... roscpp_generate_messages_cpp"
-	@echo "... roscpp_generate_messages_eus"
 	@echo "... twist_sub"
-	@echo "... rosgraph_msgs_generate_messages_nodejs"
+	@echo "... ros_udp"
 	@echo "... state_sub"
-	@echo "... roscpp_generate_messages_py"
-	@echo "... install"
-	@echo "... roscpp_generate_messages_nodejs"
-	@echo "... rosgraph_msgs_generate_messages_cpp"
-	@echo "... rosgraph_msgs_generate_messages_eus"
-	@echo "... rosgraph_msgs_generate_messages_lisp"
-	@echo "... roscpp_generate_messages_lisp"
-	@echo "... rosgraph_msgs_generate_messages_py"
-	@echo "... ros_example_walk"
 	@echo "... ros_example_position"
+	@echo "... install/local"
+	@echo "... control_via_keyboard"
+	@echo "... ros_example_walk"
 	@echo "... src/exe/control_via_keyboard.o"
 	@echo "... src/exe/control_via_keyboard.i"
 	@echo "... src/exe/control_via_keyboard.s"

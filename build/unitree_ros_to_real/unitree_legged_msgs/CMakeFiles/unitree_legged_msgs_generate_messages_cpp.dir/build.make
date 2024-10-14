@@ -110,8 +110,8 @@ unitree_ros_to_real/unitree_legged_msgs/CMakeFiles/unitree_legged_msgs_generate_
 
 /home/bunny/RoboDogFetch/devel/include/unitree_legged_msgs/LowCmd.h: /opt/ros/noetic/lib/gencpp/gen_cpp.py
 /home/bunny/RoboDogFetch/devel/include/unitree_legged_msgs/LowCmd.h: /home/bunny/RoboDogFetch/src/unitree_ros_to_real/unitree_legged_msgs/msg/LowCmd.msg
-/home/bunny/RoboDogFetch/devel/include/unitree_legged_msgs/LowCmd.h: /home/bunny/RoboDogFetch/src/unitree_ros_to_real/unitree_legged_msgs/msg/MotorCmd.msg
 /home/bunny/RoboDogFetch/devel/include/unitree_legged_msgs/LowCmd.h: /home/bunny/RoboDogFetch/src/unitree_ros_to_real/unitree_legged_msgs/msg/BmsCmd.msg
+/home/bunny/RoboDogFetch/devel/include/unitree_legged_msgs/LowCmd.h: /home/bunny/RoboDogFetch/src/unitree_ros_to_real/unitree_legged_msgs/msg/MotorCmd.msg
 /home/bunny/RoboDogFetch/devel/include/unitree_legged_msgs/LowCmd.h: /opt/ros/noetic/share/gencpp/msg.h.template
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/bunny/RoboDogFetch/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Generating C++ code from unitree_legged_msgs/LowCmd.msg"
 	cd /home/bunny/RoboDogFetch/src/unitree_ros_to_real/unitree_legged_msgs && /home/bunny/RoboDogFetch/build/catkin_generated/env_cached.sh /usr/bin/python3 /opt/ros/noetic/share/gencpp/cmake/../../../lib/gencpp/gen_cpp.py /home/bunny/RoboDogFetch/src/unitree_ros_to_real/unitree_legged_msgs/msg/LowCmd.msg -Iunitree_legged_msgs:/home/bunny/RoboDogFetch/src/unitree_ros_to_real/unitree_legged_msgs/msg -Istd_msgs:/opt/ros/noetic/share/std_msgs/cmake/../msg -Igeometry_msgs:/opt/ros/noetic/share/geometry_msgs/cmake/../msg -Isensor_msgs:/opt/ros/noetic/share/sensor_msgs/cmake/../msg -p unitree_legged_msgs -o /home/bunny/RoboDogFetch/devel/include/unitree_legged_msgs -e /opt/ros/noetic/share/gencpp/cmake/..
@@ -119,17 +119,17 @@ unitree_ros_to_real/unitree_legged_msgs/CMakeFiles/unitree_legged_msgs_generate_
 /home/bunny/RoboDogFetch/devel/include/unitree_legged_msgs/LowState.h: /opt/ros/noetic/lib/gencpp/gen_cpp.py
 /home/bunny/RoboDogFetch/devel/include/unitree_legged_msgs/LowState.h: /home/bunny/RoboDogFetch/src/unitree_ros_to_real/unitree_legged_msgs/msg/LowState.msg
 /home/bunny/RoboDogFetch/devel/include/unitree_legged_msgs/LowState.h: /home/bunny/RoboDogFetch/src/unitree_ros_to_real/unitree_legged_msgs/msg/Cartesian.msg
-/home/bunny/RoboDogFetch/devel/include/unitree_legged_msgs/LowState.h: /home/bunny/RoboDogFetch/src/unitree_ros_to_real/unitree_legged_msgs/msg/IMU.msg
 /home/bunny/RoboDogFetch/devel/include/unitree_legged_msgs/LowState.h: /home/bunny/RoboDogFetch/src/unitree_ros_to_real/unitree_legged_msgs/msg/BmsState.msg
 /home/bunny/RoboDogFetch/devel/include/unitree_legged_msgs/LowState.h: /home/bunny/RoboDogFetch/src/unitree_ros_to_real/unitree_legged_msgs/msg/MotorState.msg
+/home/bunny/RoboDogFetch/devel/include/unitree_legged_msgs/LowState.h: /home/bunny/RoboDogFetch/src/unitree_ros_to_real/unitree_legged_msgs/msg/IMU.msg
 /home/bunny/RoboDogFetch/devel/include/unitree_legged_msgs/LowState.h: /opt/ros/noetic/share/gencpp/msg.h.template
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/bunny/RoboDogFetch/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Generating C++ code from unitree_legged_msgs/LowState.msg"
 	cd /home/bunny/RoboDogFetch/src/unitree_ros_to_real/unitree_legged_msgs && /home/bunny/RoboDogFetch/build/catkin_generated/env_cached.sh /usr/bin/python3 /opt/ros/noetic/share/gencpp/cmake/../../../lib/gencpp/gen_cpp.py /home/bunny/RoboDogFetch/src/unitree_ros_to_real/unitree_legged_msgs/msg/LowState.msg -Iunitree_legged_msgs:/home/bunny/RoboDogFetch/src/unitree_ros_to_real/unitree_legged_msgs/msg -Istd_msgs:/opt/ros/noetic/share/std_msgs/cmake/../msg -Igeometry_msgs:/opt/ros/noetic/share/geometry_msgs/cmake/../msg -Isensor_msgs:/opt/ros/noetic/share/sensor_msgs/cmake/../msg -p unitree_legged_msgs -o /home/bunny/RoboDogFetch/devel/include/unitree_legged_msgs -e /opt/ros/noetic/share/gencpp/cmake/..
 
 /home/bunny/RoboDogFetch/devel/include/unitree_legged_msgs/HighCmd.h: /opt/ros/noetic/lib/gencpp/gen_cpp.py
 /home/bunny/RoboDogFetch/devel/include/unitree_legged_msgs/HighCmd.h: /home/bunny/RoboDogFetch/src/unitree_ros_to_real/unitree_legged_msgs/msg/HighCmd.msg
-/home/bunny/RoboDogFetch/devel/include/unitree_legged_msgs/HighCmd.h: /home/bunny/RoboDogFetch/src/unitree_ros_to_real/unitree_legged_msgs/msg/LED.msg
 /home/bunny/RoboDogFetch/devel/include/unitree_legged_msgs/HighCmd.h: /home/bunny/RoboDogFetch/src/unitree_ros_to_real/unitree_legged_msgs/msg/BmsCmd.msg
+/home/bunny/RoboDogFetch/devel/include/unitree_legged_msgs/HighCmd.h: /home/bunny/RoboDogFetch/src/unitree_ros_to_real/unitree_legged_msgs/msg/LED.msg
 /home/bunny/RoboDogFetch/devel/include/unitree_legged_msgs/HighCmd.h: /opt/ros/noetic/share/gencpp/msg.h.template
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/bunny/RoboDogFetch/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Generating C++ code from unitree_legged_msgs/HighCmd.msg"
 	cd /home/bunny/RoboDogFetch/src/unitree_ros_to_real/unitree_legged_msgs && /home/bunny/RoboDogFetch/build/catkin_generated/env_cached.sh /usr/bin/python3 /opt/ros/noetic/share/gencpp/cmake/../../../lib/gencpp/gen_cpp.py /home/bunny/RoboDogFetch/src/unitree_ros_to_real/unitree_legged_msgs/msg/HighCmd.msg -Iunitree_legged_msgs:/home/bunny/RoboDogFetch/src/unitree_ros_to_real/unitree_legged_msgs/msg -Istd_msgs:/opt/ros/noetic/share/std_msgs/cmake/../msg -Igeometry_msgs:/opt/ros/noetic/share/geometry_msgs/cmake/../msg -Isensor_msgs:/opt/ros/noetic/share/sensor_msgs/cmake/../msg -p unitree_legged_msgs -o /home/bunny/RoboDogFetch/devel/include/unitree_legged_msgs -e /opt/ros/noetic/share/gencpp/cmake/..
@@ -137,9 +137,9 @@ unitree_ros_to_real/unitree_legged_msgs/CMakeFiles/unitree_legged_msgs_generate_
 /home/bunny/RoboDogFetch/devel/include/unitree_legged_msgs/HighState.h: /opt/ros/noetic/lib/gencpp/gen_cpp.py
 /home/bunny/RoboDogFetch/devel/include/unitree_legged_msgs/HighState.h: /home/bunny/RoboDogFetch/src/unitree_ros_to_real/unitree_legged_msgs/msg/HighState.msg
 /home/bunny/RoboDogFetch/devel/include/unitree_legged_msgs/HighState.h: /home/bunny/RoboDogFetch/src/unitree_ros_to_real/unitree_legged_msgs/msg/Cartesian.msg
-/home/bunny/RoboDogFetch/devel/include/unitree_legged_msgs/HighState.h: /home/bunny/RoboDogFetch/src/unitree_ros_to_real/unitree_legged_msgs/msg/IMU.msg
 /home/bunny/RoboDogFetch/devel/include/unitree_legged_msgs/HighState.h: /home/bunny/RoboDogFetch/src/unitree_ros_to_real/unitree_legged_msgs/msg/BmsState.msg
 /home/bunny/RoboDogFetch/devel/include/unitree_legged_msgs/HighState.h: /home/bunny/RoboDogFetch/src/unitree_ros_to_real/unitree_legged_msgs/msg/MotorState.msg
+/home/bunny/RoboDogFetch/devel/include/unitree_legged_msgs/HighState.h: /home/bunny/RoboDogFetch/src/unitree_ros_to_real/unitree_legged_msgs/msg/IMU.msg
 /home/bunny/RoboDogFetch/devel/include/unitree_legged_msgs/HighState.h: /opt/ros/noetic/share/gencpp/msg.h.template
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/bunny/RoboDogFetch/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_11) "Generating C++ code from unitree_legged_msgs/HighState.msg"
 	cd /home/bunny/RoboDogFetch/src/unitree_ros_to_real/unitree_legged_msgs && /home/bunny/RoboDogFetch/build/catkin_generated/env_cached.sh /usr/bin/python3 /opt/ros/noetic/share/gencpp/cmake/../../../lib/gencpp/gen_cpp.py /home/bunny/RoboDogFetch/src/unitree_ros_to_real/unitree_legged_msgs/msg/HighState.msg -Iunitree_legged_msgs:/home/bunny/RoboDogFetch/src/unitree_ros_to_real/unitree_legged_msgs/msg -Istd_msgs:/opt/ros/noetic/share/std_msgs/cmake/../msg -Igeometry_msgs:/opt/ros/noetic/share/geometry_msgs/cmake/../msg -Isensor_msgs:/opt/ros/noetic/share/sensor_msgs/cmake/../msg -p unitree_legged_msgs -o /home/bunny/RoboDogFetch/devel/include/unitree_legged_msgs -e /opt/ros/noetic/share/gencpp/cmake/..
