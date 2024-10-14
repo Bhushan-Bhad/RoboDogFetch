@@ -159,7 +159,8 @@ def human_detection():
                                     # Publish the new target position
                                     target_msg = PoseStamped()
                                     target_msg.header.stamp = rospy.Time.now()
-                                    target_msg.header.frame_id = "camera_frame"
+                                    target_msg.header.frame_id = "map"
+                                    #target_msg.header.frame_id = "camera_frame"
                                     target_msg.pose.position.x = x_center_scaled * 0.1
                                     target_msg.pose.position.y = y_center_scaled * 0.1
                                     target_msg.pose.position.z = calibrated_distance

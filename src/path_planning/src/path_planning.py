@@ -11,7 +11,7 @@ from visualization_msgs.msg import Marker, MarkerArray
 from sensor_msgs.msg import Image
 from cv_bridge import CvBridge, CvBridgeError
 
-from unitree_legged_sdk.example_py.example_walk_test.py import set_path
+#from unitree_legged_sdk.example_py.example_walk_test.py import set_path
 
 class AStarPlannerNode:
     def __init__(self):
