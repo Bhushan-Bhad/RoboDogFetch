@@ -1,0 +1,8 @@
+prefix=/home/bunny/RoboDogFetch/devel_isolated/rtabmap_rviz_plugins
+
+Name: rtabmap_rviz_plugins
+Description: Description of rtabmap_rviz_plugins
+Version: 0.21.5
+Cflags: -I/home/bunny/RoboDogFetch/src/rtabmap_ros/rtabmap_rviz_plugins/include
+Libs: -L${prefix}/lib -lrtabmap_rviz_plugins
+Requires: roscpp sensor_msgs std_msgs pcl_conversions pluginlib rviz tf rtabmap_conversions rtabmap_msgs

@@ -1,0 +1,8 @@
+prefix=/home/bunny/RoboDogFetch/devel_isolated/rtabmap_ros
+
+Name: rtabmap_ros
+Description: Description of rtabmap_ros
+Version: 0.21.5
+Cflags: 
+Libs: -L${prefix}/lib 
+Requires: 
